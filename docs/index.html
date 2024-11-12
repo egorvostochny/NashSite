@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NashSite</title>
-
+  
   <!-- Подключение CSS Bootstrap через CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -13,36 +13,98 @@
   <!-- Навигация -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <!-- Логотип -->
       <a class="navbar-brand" href="#">NashSite</a>
-      
-      <!-- Кнопка-гамбургер для мобильных устройств -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <!-- Ссылки в меню -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Главная</a>
+            <a class="nav-link" href="#" id="homeLink">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Услуги</a>
+            <a class="nav-link" href="#" id="servicesLink">Услуги</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Портфолио</a>
+            <a class="nav-link" href="#" id="portfolioLink">Портфолио</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Контакты</a>
+            <a class="nav-link" href="#" id="contactLink">Контакты</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Подключение JavaScript Bootstrap через CDN -->
+  <!-- Секция Главная (по умолчанию показывается) -->
+  <div id="homeSection" class="container my-5">
+    <h2 class="text-center mb-4">Добро пожаловать на наш сайт!</h2>
+    <p>Здесь будет основное содержимое вашего сайта.</p>
+  </div>
+
+  <!-- Секция Портфолио (скрыта по умолчанию) -->
+  <div id="portfolioSection" class="container my-5" style="display: none;">
+    <h2 class="text-center mb-4">Наше Портфолио</h2>
+
+    <!-- Карусель -->
+    <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" id="carouselItems">
+        <!-- Карточки будут генерироваться через JavaScript -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Предыдущий</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Следующий</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Подключение JavaScript Bootstrap и собственного скрипта -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Данные для карусели (можно брать с API или файла)
+    const portfolioItems = [
+      { title: "Проект 1", description: "Описание проекта 1", image: "https://via.placeholder.com/400x300" },
+      { title: "Проект 2", description: "Описание проекта 2", image: "https://via.placeholder.com/400x300" },
+      { title: "Проект 3", description: "Описание проекта 3", image: "https://via.placeholder.com/400x300" }
+    ];
+
+    // Функция для рендеринга карточек в карусели
+    function renderPortfolio() {
+      const carouselItems = document.getElementById('carouselItems');
+      portfolioItems.forEach((item, index) => {
+        const isActive = index === 0 ? 'active' : ''; // Первая карточка активна
+        const itemHTML = `
+          <div class="carousel-item ${isActive}">
+            <img src="${item.image}" class="d-block w-100" alt="${item.title}">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>${item.title}</h5>
+              <p>${item.description}</p>
+            </div>
+          </div>
+        `;
+        carouselItems.innerHTML += itemHTML;
+      });
+    }
+
+    // Вызов функции для отображения карусели
+    renderPortfolio();
+
+    // Обработчик кликов по кнопкам меню
+    document.getElementById('homeLink').addEventListener('click', () => {
+      document.getElementById('homeSection').style.display = 'block';
+      document.getElementById('portfolioSection').style.display = 'none';
+    });
+
+    document.getElementById('portfolioLink').addEventListener('click', () => {
+      document.getElementById('homeSection').style.display = 'none';
+      document.getElementById('portfolioSection').style.display = 'block';
+    });
+
+  </script>
 
 </body>
 </html>
