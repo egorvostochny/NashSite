@@ -1,0 +1,271 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Стили для хедера */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(64, 64, 64, 0.9); /* Темно-серый фон */
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo img {
+    width: 50px;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-icon div {
+    position: absolute;
+    height: 4px;
+    background-color: white;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.menu-icon .bar1 {
+    top: 0;
+}
+
+.menu-icon .bar2 {
+    top: 8px;
+}
+
+.menu-icon .bar3 {
+    top: 16px;
+}
+
+/* Анимация для кнопки меню (горизонтальные полоски) */
+.menu-icon.open .bar1 {
+    transform: rotate(45deg);
+    top: 8px;
+}
+
+.menu-icon.open .bar2 {
+    opacity: 0;
+}
+
+.menu-icon.open .bar3 {
+    transform: rotate(-45deg);
+    top: 8px;
+}
+
+/* Стили для меню */
+.menu {
+    position: fixed;
+    top: 60px; /* Меню будет скрыто под хедером */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(64, 64, 64, 0.9); /* Темно-серый фон */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transform: translateY(-100%);
+    transition: transform 0.5s ease;
+    z-index: 999;
+}
+
+.menu.show {
+    transform: translateY(0);
+}
+
+.menu-button {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 24px; /* Увеличиваем размер текста */
+    text-transform: uppercase; /* Все буквы в верхнем регистре */
+    font-family: 'Arial', sans-serif; /* Можно заменить на другой шрифт */
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    text-decoration: underline;
+}
+
+/* Контент страницы */
+main {
+    padding-top: 80px; /* Отступ, чтобы контент не перекрывался хедером */
+    padding: 20px;
+}
+
+.content-section {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.content-section.black {
+    background-color: black;
+    color: white;
+}
+
+.content-section.white {
+    background-color: white;
+    color: black;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(64, 64, 64, 0.9);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Overlay для затемнения фона при открытом меню */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 998; /* Над контентом, но под меню */
+}
+
+.menu.show ~ .overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+.first-section {
+    background-color: black;
+    color: white;
+    padding: 40px;
+    margin: 20px 0;
+}
+
+.first-section h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.first-section p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Мобильная версия */
+@media screen and (max-width: 768px) {
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-icon {
+        display: block; /* Показываем иконку меню на мобильных */
+    }
+
+    .menu-button {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+.carousel {
+    background-color: #333;
+    color: white;
+    padding: 40px;
+    margin: 20px 0;
+}
+
+.carousel h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.carousel-container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-item {
+    flex-shrink: 0;
+    width: 100%;
+    transition: transform 0.5s ease;
+    margin-right: 20px;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel-info {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.info-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 25px;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.info-text {
+    margin-right: 10px;
+}
+
+.info-url {
+    font-size: 20px;
+}
+
+/* Стили для перехода */
+.carousel-item.active {
+    transform: translateX(0);
+}
+
+.carousel-item.next {
+    transform: translateX(100%);
+}
+
+.carousel-item.prev {
+    transform: translateX(-100%);
+}
+
